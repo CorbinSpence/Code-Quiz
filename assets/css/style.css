@@ -47,6 +47,7 @@ main{
 .answerButton:hover{
     background-color: rgb(138, 77, 138);
     border-width: 2px;
+    cursor: pointer;
 }
 .timer{
     position: absolute;
@@ -58,12 +59,14 @@ main{
     position: absolute;
     top:5%;
     left:5%;
-    
-}
-.highScores a{
     color: violet;
     text-decoration: none;
+    font-size: large;
+}
+.highScores:hover{
+    text-decoration: underline;
     font-weight: bold;
+    cursor: pointer;
 }
 .highscore-request,
 .scoreboard-view{
@@ -104,8 +107,12 @@ main{
 #return-home{
     margin-right: 20px;
 }
-#submit-username:hover{
+#submit-username:hover,
+#return-home:hover,
+#clear-scores:hover,
+.start-button:hover{
     background-color: rgb(224, 79, 224);
+    cursor: pointer;
 }
 #submit-username:focus{
     background-color: rgb(131, 48, 131);

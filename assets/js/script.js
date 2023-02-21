@@ -8,6 +8,7 @@ var quizIsOver = false
 const container = $('.container')
 var quizResults = []
 const resultsKey = 'results'
+var countdown = -1
 
 var quiz = {
     question: '',
@@ -67,8 +68,7 @@ function initializeQuiz(){
     }
     container.append('<div class="timer">Time: '+time+'</div>')
     var timerBox = $('.timer')
-    container.append('<div class="highScores"><a href="#"> View high scores </a></div>')
-    var countdown = setInterval(function(){
+    countdown = setInterval(function(){
         if(time<=0 || quizIsOver){
             clearInterval(countdown)
             console.log('The quiz is over')
@@ -109,12 +109,35 @@ function initializeQuiz(){
     setUpNextQuestion()
 }
 
+container.append('<div class="start-container"></div>')
+var startContainer = $('.start-container')
+startContainer.append('<input type="button" class="start-button" value="Begin Quiz">')
 var startButton = $('.start-button')
 startButton.on('click', function(event){
     event.preventDefault
     $(event.target).remove()
     initializeQuiz()
     setUpNextQuestion()
+})
+container.append('<div class="highScores"> View high scores </div>')
+var highScores = $('.highScores')
+highScores.on('click', function(){
+    let startContainer = $('.start-container')
+    let highScores = $('.highScores')
+    let questionBox = $('.questionBox')
+    let answerRadioButtons = $('.answerRadioButtons')
+    let timer = $('.timer')
+    let highscoreRequest = $('.highscore-request')
+    highScores.remove()
+    startContainer.remove()
+    questionBox.remove()
+    answerRadioButtons.remove()
+    timer.remove()
+    highscoreRequest.remove()
+    if(countdown!=-1){
+        clearInterval(countdown)
+    }
+    setUpHSBoard()
 })
 
 function setUpNextQuestion(){
@@ -133,7 +156,6 @@ function removeQuiz(){
     let form = $('form')
     let timerBox = $('.timer')
     let questionBox = $('.questionBox')
-    let highScores = $('.highScores')
     let radioButtons = $('.answerRadioButtons')
 
     form.children('.answerButton').remove()
@@ -141,7 +163,6 @@ function removeQuiz(){
     radioButtons.remove()
     questionBox.remove()
     timerBox.remove()
-    highScores.remove()
 }
 function setUpSubmissionPage(){
     container.append('<div class="highscore-request"></div>')
@@ -177,7 +198,9 @@ function setUpSubmissionPage(){
 function destroySubmissionPage(){
     console.log('destroySubmissionPage')
     var requestDiv = $('.highscore-request')
+    let highScores = $('.highScores')
     requestDiv.remove()
+    highScores.remove()
 }
 function setUpHSBoard(){
     console.log('setUpHSBoard')
@@ -199,6 +222,7 @@ function setUpHSBoard(){
         event.preventDefault()
         destroyHSPage()
         container.append('<input type="button" class="start-button" value="Begin Quiz">')
+        container.append('<div class="highScores"> View high scores </div>')
         time = 100
         currentIndex = 0
         quizIsOver = false
@@ -208,6 +232,25 @@ function setUpHSBoard(){
             $(event.target).remove()
             initializeQuiz()
             setUpNextQuestion()
+        })
+        let highScores = $('.highScores')
+        highScores.on('click', function(){
+            let startContainer = $('.start-container')
+            let highScores = $('.highScores')
+            let questionBox = $('.questionBox')
+            let answerRadioButtons = $('.answerRadioButtons')
+            let timer = $('.timer')
+            let highscoreRequest = $('.highscore-request')
+            highScores.remove()
+            startContainer.remove()
+            questionBox.remove()
+            answerRadioButtons.remove()
+            timer.remove()
+            highscoreRequest.remove()
+            if(countdown!=-1){
+                clearInterval(countdown)
+            }
+            setUpHSBoard()
         })
     })
     let clearButton = $('#clear-scores')

@@ -69,12 +69,15 @@ function initializeQuiz(){
     var timerBox = $('.timer')
     container.append('<div class="highScores"><a href="#"> View high scores </a></div>')
     var countdown = setInterval(function(){
-        time--
-        timerBox.text('Time: '+time)
         if(time<=0 || quizIsOver){
             clearInterval(countdown)
             console.log('The quiz is over')
             quizIsOver = true
+            removeQuiz()
+            setUpSubmissionPage()
+        }else{
+            time--
+            timerBox.text('Time: '+time)
         }
     },1000)
     currentQuestion = JSON.parse(localStorage.getItem(currentIndex))
@@ -84,23 +87,23 @@ function initializeQuiz(){
         if($(event.target).val()===currentQuestion.correctAnswer){
             //if there is a next question
             if(currentIndex<questionCount-1){
-            console.log("right answer")
-            currentIndex++
-            console.log(currentIndex)
-            setUpNextQuestion()
+                console.log("right answer")
+                currentIndex++
+                console.log(currentIndex)
+                setUpNextQuestion()
             }else{
                 quizIsOver = true
-                removeQuiz()
-                setUpSubmissionPage()
             }
         }else{
             console.log("wrong answer")
-            if(time<10){
-                time = 0
-            }else{
-                time-=10
-            }
+            time = time<10? 0:time-10
             timerBox.text('Time: '+time)
+            if(currentIndex<questionCount-1){
+                currentIndex++
+                setUpNextQuestion()
+            }else{
+                quizIsOver = true
+            }
         }
     })
     setUpNextQuestion()

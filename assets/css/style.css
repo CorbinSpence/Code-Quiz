@@ -19,9 +19,6 @@ main{
     position: absolute;
     top: 49%;
     left: 49%;
-    background-color: violet;
-    border-radius: 5px;
-    border-width: 0;
 }
 .questionBox{
     position: absolute;
@@ -68,7 +65,8 @@ main{
     text-decoration: none;
     font-weight: bold;
 }
-.highscore-request{
+.highscore-request,
+.scoreboard-view{
     position: absolute;
     padding: 25px;
     top:40%;
@@ -90,13 +88,21 @@ main{
     border: 3px solid violet;
     background-color: white;
 }
-#submit-username{
-    margin-left: 120px;
+#submit-username,
+#return-home,
+#clear-scores,
+.start-button{
     margin-top: 20px;
     padding: 5px;
     background-color: violet;
     border: 2px solid black;
     border-radius: 3px;
+}
+#submit-username{
+    margin-left: 120px;
+}
+#return-home{
+    margin-right: 20px;
 }
 #submit-username:hover{
     background-color: rgb(224, 79, 224);

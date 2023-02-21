@@ -15,10 +15,20 @@ main{
     width: inherit;
     height: inherit;
 }
-.start-button{
+.start-container{
     position: absolute;
-    top: 49%;
-    left: 49%;
+    width: 25%;
+    top: 40%;
+    left: 37%;
+    min-width: 337px;
+}
+.start-container h2,
+.start-container p{
+    text-align: center;
+}
+.start-button{
+    margin-left: 39%;
+    margin-right: 39%;
 }
 .questionBox{
     position: absolute;
@@ -78,7 +88,8 @@ main{
     border-radius: 5px;
     background-color: rgb(255, 224, 168);
 }
-.highscore-request h2{
+.highscore-request h2,
+.highscore-request h3{
     text-align: center;
 }
 #player-username{

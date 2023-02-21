@@ -6,8 +6,8 @@ var currentIndex = 0
 var currentQuestion
 var quizIsOver = false
 const container = $('.container')
-var quizResults = []
 const resultsKey = 'results'
+var quizResults = JSON.parse(localStorage.getItem(resultsKey))
 var countdown = -1
 
 var quiz = {
@@ -55,6 +55,20 @@ quiz[3] = 'alert()'
 localStorage.setItem(questionCount, JSON.stringify(quiz))
 questionCount++
 
+container.append('<div class="start-container"></div>')
+var startContainer = $('.start-container')
+startContainer.append('<h2> Coding Quiz Challenge </h2>')
+startContainer.append('<p> Try to answer the folowing code related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds! </p>')
+startContainer.append('<input type="button" class="start-button" value="Begin Quiz">')
+var startButton = $('.start-button')
+startButton.on('click', function(event){
+    event.preventDefault
+    $('.start-container').remove()
+    initializeQuiz()
+    setUpNextQuestion()
+})
+container.append('<div class="highScores"> View high scores </div>')
+var highScores = $('.highScores')
 
 function initializeQuiz(){
     container.append('<div class="questionBox">  </div>')
@@ -109,18 +123,7 @@ function initializeQuiz(){
     setUpNextQuestion()
 }
 
-container.append('<div class="start-container"></div>')
-var startContainer = $('.start-container')
-startContainer.append('<input type="button" class="start-button" value="Begin Quiz">')
-var startButton = $('.start-button')
-startButton.on('click', function(event){
-    event.preventDefault
-    $(event.target).remove()
-    initializeQuiz()
-    setUpNextQuestion()
-})
-container.append('<div class="highScores"> View high scores </div>')
-var highScores = $('.highScores')
+
 highScores.on('click', function(){
     let startContainer = $('.start-container')
     let highScores = $('.highScores')
@@ -167,11 +170,12 @@ function removeQuiz(){
 function setUpSubmissionPage(){
     container.append('<div class="highscore-request"></div>')
     var highscoreRequest = $('.highscore-request')
-    highscoreRequest.append('<h2>Type your username</h2>')
+    highscoreRequest.append('<h2>All done!</h2>')
+    highscoreRequest.append('<h3> Your score is '+time+'. </h3>')
     highscoreRequest.append('<form class="submission-form"></form>')
     var form = $('.submission-form')
+    form.append('<label for="player-username"> Enter name -\t </label>')
     form.append('<input type="text" placeholder="abc" id="player-username">')
-    form.append('<span> - Highscore: <b>'+time+'</b> </span>')
     form.append('<br>')
     form.append('<input type="button" value="Submit" id="submit-username">')
     highscoreRequest.append('<div class="username-error"> Type in a name </div>')
@@ -206,7 +210,7 @@ function setUpHSBoard(){
     console.log('setUpHSBoard')
     container.append('<div class="scoreboard-view"></div>')
     let scoreboard = $('.scoreboard-view')
-    scoreboard.append('<h2> Previous Scores </h2>')
+    scoreboard.append('<h2> High Scores </h2>')
     scoreboard.append('<ol class="score-list"></ol>')
     let scoreList = $('.score-list')
     let results = JSON.parse(localStorage.getItem(resultsKey))
@@ -221,7 +225,11 @@ function setUpHSBoard(){
     returnButton.on('click', function(event){
         event.preventDefault()
         destroyHSPage()
-        container.append('<input type="button" class="start-button" value="Begin Quiz">')
+        container.append('<div class="start-container"></div>')
+        let startContainer = $('.start-container')
+        startContainer.append('<h2> Coding Quiz Challenge </h2>')
+        startContainer.append('<p> Try to answer the folowing code related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds! </p>')
+        startContainer.append('<input type="button" class="start-button" value="Begin Quiz">')
         container.append('<div class="highScores"> View high scores </div>')
         time = 100
         currentIndex = 0
@@ -229,7 +237,7 @@ function setUpHSBoard(){
         let startButton = $('.start-button')
         startButton.on('click', function(event){
             event.preventDefault
-            $(event.target).remove()
+            $('.start-container').remove()
             initializeQuiz()
             setUpNextQuestion()
         })

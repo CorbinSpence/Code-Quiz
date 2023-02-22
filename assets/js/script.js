@@ -10,7 +10,7 @@ const resultsKey = 'results'
 var quizResults
 if(JSON.parse(localStorage.getItem(resultsKey))==null){
     let emptyArr = []
-    localStorage.setItem(resultsKey, emptyArr)
+    localStorage.setItem(resultsKey, JSON.stringify(emptyArr))
     quizResults = emptyArr
 }else{
     quizResults = JSON.parse(localStorage.getItem(resultsKey))

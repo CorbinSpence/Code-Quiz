@@ -8,11 +8,11 @@ A user enters the site and clicks the start button. Afterwards, they are present
 
 ## Deployment
 
-Website: [Code Quiz]()
+Website: [Code Quiz](https://corbinspence.github.io/Code-Quiz/)
 
 ## Screenshot
 
-![code quiz screenshot]()
+![code quiz screenshot](./assets/images/screenshot.PNG)
 
 ## Author
 

@@ -186,7 +186,8 @@ function setUpSubmissionPage(){
         let typedName = $('#player-username')
         if(typedName.val()!=''){
             console.log('submited '+typedName.val()+' - '+time)
-            quizResults.push({name:typedName.val(), score:time})
+            //quizResults.push({name:typedName.val(), score:time})
+            addResult(quizResults, {name:typedName.val(), score:time})
             localStorage.setItem(resultsKey, JSON.stringify(quizResults))
             typedName.val('')
             errorMessage.hide()
@@ -272,6 +273,27 @@ function setUpHSBoard(){
 function destroyHSPage(){
     let hSBoard = $('.scoreboard-view') 
     hSBoard.remove()
+}
+function addResult(arr, val){
+    let len = arr.length
+    console.log('This is '+len)
+    if(len==0){
+        arr.push(val)
+    }else{
+        for(let i=0; i<len; i++){
+            console.log(arr[i].score)
+            console.log(val.score)
+            if(arr[i].score<=val.score){
+                console.log('value spliced')
+                arr.splice(i, 0, val)
+                break
+            }else if(i===len-1){
+                console.log('value pushed')
+                arr.push(val)
+            }
+        }
+    }
+    console.log(arr)
 }
 // This is just for testing purposes
 function printPlayerScores(){

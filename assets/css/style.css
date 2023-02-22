@@ -89,7 +89,8 @@ main{
     background-color: rgb(255, 224, 168);
 }
 .highscore-request h2,
-.highscore-request h3{
+.highscore-request h3,
+.scoreboard-view h2{
     text-align: center;
 }
 #player-username{
@@ -114,6 +115,13 @@ main{
 }
 #submit-username{
     margin-left: 120px;
+}
+.score-list li{
+    border-bottom: 1px solid black;
+    padding: 3px;
+    margin-bottom: 5px;
+    max-width: 125px;
+    background-color: lightgray;
 }
 #return-home{
     margin-right: 20px;

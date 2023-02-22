@@ -1,4 +1,4 @@
-const devMode = true
+
 
 var time = 100
 var questionCount = 0
@@ -7,6 +7,9 @@ var currentQuestion
 var quizIsOver = false
 const container = $('.container')
 const resultsKey = 'results'
+if(JSON.parse(localStorage.getItem(resultsKey))==null){
+    localStorage.setItem(resultsKey, [])
+}
 var quizResults = JSON.parse(localStorage.getItem(resultsKey))
 var countdown = -1
 

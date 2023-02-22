@@ -7,10 +7,15 @@ var currentQuestion
 var quizIsOver = false
 const container = $('.container')
 const resultsKey = 'results'
+var quizResults
 if(JSON.parse(localStorage.getItem(resultsKey))==null){
-    localStorage.setItem(resultsKey, [])
+    let emptyArr = []
+    localStorage.setItem(resultsKey, emptyArr)
+    quizResults = emptyArr
+}else{
+    quizResults = JSON.parse(localStorage.getItem(resultsKey))
 }
-var quizResults = JSON.parse(localStorage.getItem(resultsKey))
+
 var countdown = -1
 
 var quiz = {
